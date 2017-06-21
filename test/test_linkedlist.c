@@ -132,3 +132,25 @@ void test_listAdd_given_linked_list_with_Ali_and_Baba_then_add_Abu_expect_3_item
 	TEST_ASSERT_EQUAL_PTR(&baba,itemBaba.data);
 }
 
+void test_listRemove_given_ali_abu_baba_then_remove_baba_expect_ali_abu_left(void){
+	LinkedList list;
+	
+	list.head=&itemAli;
+	list.tail=&itemBaba;
+	list.len=3;
+	itemAli.next=&item.Abu;
+	itemAbu.next=&item.Baba;
+	itemBaba.next=NULL;
+	
+
+	listRemove(&list,"BABA");
+	
+	TEST_ASSERT_EQUAL_PTR(&itemAli,list.head);
+	TEST_ASSERT_EQUAL_PTR(&itemAbu,list.tail);
+	TEST_ASSERT_EQUAL(2,list.len);
+	TEST_ASSERT_EQUAL_PTR(&itemAbu,itemAli.next);
+	TEST_ASSERT_EQUAL_PTR(&ali,itemAli.data);
+	TEST_ASSERT_EQUAL_PTR(&abu,list.head);
+	TEST_ASSERT_NULL(itemAbu.next);
+
+}
