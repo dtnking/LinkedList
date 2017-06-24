@@ -9,9 +9,6 @@ struct Item{
 	void *data;
 };
 
-
-
-
 struct LinkedList{
 	Item *head;
 	Item *tail;
@@ -20,6 +17,6 @@ struct LinkedList{
 
 void listInit(LinkedList *list);
 void listAdd(LinkedList *list,Item *item);
-
+Item *listRemove(LinkedList *list,char *name);
 
 #endif // _LINKEDLIST_H

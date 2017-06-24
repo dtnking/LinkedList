@@ -47,8 +47,7 @@ Item itemAbu={
 	(void*)&Abu
 };
 	
-void test_listInit_ensure_initialized_to_NULL_and_zero(void)
-{
+void test_listInit_ensure_initialized_to_NULL_and_zero(void){
 	LinkedList list={
 	(Item *)-1,
 	(Item *)-1,
@@ -138,19 +137,16 @@ void test_listRemove_given_ali_abu_baba_then_remove_baba_expect_ali_abu_left(voi
 	list.head=&itemAli;
 	list.tail=&itemBaba;
 	list.len=3;
-	itemAli.next=&item.Abu;
-	itemAbu.next=&item.Baba;
+	itemAli.next=&itemAbu;
+	itemAbu.next=&itemBaba;
 	itemBaba.next=NULL;
 	
-
 	listRemove(&list,"BABA");
-	
 	TEST_ASSERT_EQUAL_PTR(&itemAli,list.head);
 	TEST_ASSERT_EQUAL_PTR(&itemAbu,list.tail);
 	TEST_ASSERT_EQUAL(2,list.len);
 	TEST_ASSERT_EQUAL_PTR(&itemAbu,itemAli.next);
 	TEST_ASSERT_EQUAL_PTR(&ali,itemAli.data);
-	TEST_ASSERT_EQUAL_PTR(&abu,list.head);
+	TEST_ASSERT_EQUAL_PTR(&Abu,list.head);
 	TEST_ASSERT_NULL(itemAbu.next);
-
 }
