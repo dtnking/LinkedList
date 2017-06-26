@@ -26,39 +26,48 @@ void listAdd(LinkedList *list,Item *item){
 	}
 }
 
-Item *listRemove(LinkedList *list,char *namez){
-	Student *student;
-	student =(Student *)(list->head->data);
-	Item *temphead= list->head;
-	Item *prev=NULL;
-	Item *forw=NULL;
+Item *listRemove(LinkedList *list,char *name){
+	Item *cur = list->head;
+	Item *prev = NULL;
 	
 	if(list->head==NULL)
 		return NULL;
 	
 	else{
-		while(strcmp(student->name,namez)!=0){
-			prev=list->head;
-			student=student->next;
+		while(strcmp(((Student *)cur->data)->name,name)!=0){
+			prev = cur;
+			cur = cur->next;
 			}
 	
 	/* 
-	 * remove the last data...
-	 */
-			if(forw==NULL){
-				list->head->next=NULL;		//delete the data;
-				list->head=temphead;		//restore the head;
-				list->tail=prev;
-				list->len--;
-				}
-	
-	/*
 	 * remove the first data...
 	 */
-			else if(list->head==temphead){
-				list->head=temphead->next;
-				list->head->next=list->tail;
+			if(cur==list->head){
+				if(list->head==list->tail){		// if only one data...
+					listInit(list);
+				}
+				else{							// more than one data..
+					cur = cur->next;
+					list->head = cur;
+					list->len--;
+					}
+			}
+	
+	/*
+	 * remove the last data...
+	 */
+			else if(cur == list->tail){
+				list->tail=prev;
+				prev->next=NULL;
 				list->len--;
 				}	
+				
+	/*
+	* remove the middle data...
+	*/		
+			else{
+				prev->next=cur->next;
+				list->len--;
+				}
 		}	
 }
